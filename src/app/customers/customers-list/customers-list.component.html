@@ -1,0 +1,50 @@
+<br><br>
+<div> Months :
+    <select>
+       <option *ngFor="let i of months">{{i}}</option>
+    </select>
+ </div><br>
+ <b>{{todaydate | date:'d/M/y'}}</b><br/>
+ <b>{{todaydate | date:'shortTime'}}</b>
+ <br><br>
+
+<div   class="customerbox" >
+
+    <filter-textbox (changed)="filter($event)"></filter-textbox>
+
+    <button (click)="clickMe()">Hide/Show</button>
+
+    <br />
+    <br />
+<table class="table table-hover" [hidden]="!isVisible">
+    <thead>
+        <tr>
+            
+            <th>Name</th>
+            <th>City</th>
+            <th>OrderTotal</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let cust of filteredCustomers">
+   
+        <td>
+            <a> {{ cust.name }} </a>
+        </td>
+        <td>{{cust.city}} </td>
+        <td>{{cust.orderTotal  | currency:"USD"}} </td>
+    </tr>
+    <tr *ngIf="filteredCustomers && filteredCustomers.length">
+      
+        <td colspan="2">&nbsp;</td>
+        <td style="border-top: 1px solid black;">
+             {{customersOrderTotal | currency:"USD"}}
+        </td>
+    </tr>
+    <tr *ngIf="!filteredCustomers || !filteredCustomers.length">
+        <td colspan="4"> No customers found  </td>
+    </tr>
+    
+Number of Customers: {{ filteredCustomers.length}}
+</table>
+<br />
+</div>
